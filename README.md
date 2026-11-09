@@ -1,28 +1,106 @@
+# SmartIntern – AI-Powered Internship Recommendation and Management System
 
-# SmartIntern
+## Project Overview
 
-SmartIntern is an AI-powered internship recommendation and management platform. It helps students maintain their profiles and resumes, discover relevant internships, track applications, and communicate with recruiters.
+SmartIntern is an AI-powered internship recommendation and management platform designed to help students discover suitable internship and job opportunities based on their profiles, resumes, and skills.
+
+The platform provides features such as student and recruiter registration, login, profile management, resume uploading, skill extraction, internship recommendations, application tracking, and messaging.
+
+## Project Novelty
+
+The main idea behind SmartIntern is to combine skill-based internship recommendations with internship application management in a single platform.
+
+Students can identify relevant opportunities based on their skills and qualifications, view matching and missing skills, and manage their applications. The system also combines relational and NoSQL databases to handle different types of application data.
 
 ## Features
 
-- **Authentication:** Student and recruiter registration, login, and logout.
-- **Profile Management:** Create and update student profiles and skills.
-- **Resume Management:** Upload PDF resumes, extract resume text, and support resume tailoring.
-- **Internship Recommendations:** Recommend internships based on student profiles and skills.
-- **Application Tracking:** View and manage internship applications.
-- **Recruiter Job Management:** Manage internship and job listings.
-- **Inbox and Messaging:** Retrieve contacts and messages and mark messages as read.
-- **Recommendation History:** View recommendation activity and history.
-- **Database Integration:** PostgreSQL stores relational application data, while MongoDB stores recommendation activity logs.
+- **Student Registration and Login:** User registration and authentication.
+- **Recruiter Registration and Login:** Recruiter account access.
+- **Student Profile Management:** Manage personal and academic details.
+- **Resume Upload:** Upload PDF resumes and extract resume text.
+- **Skill Extraction:** Identify skills from uploaded resumes.
+- **Job Recommendations:** Display relevant internship and job opportunities.
+- **Application Tracking:** Track submitted applications.
+- **Messaging:** Support communication through an inbox.
+- **Insights Dashboard:** View application and opportunity statistics.
+- **Resume PDF Generation:** Generate a formatted PDF from resume information.
+- **Recommendation Activity Logging:** Store recommendation activity using MongoDB.
 
-## Tech Stack
+## Technology Stack
 
-- **Frontend:** Next.js, React, TypeScript, Tailwind CSS
-- **Backend:** Next.js API Routes
-- **Database:** PostgreSQL and MongoDB
-- **Authentication:** JWT-based sessions
-- **Resume Processing:** PDF text extraction
-- **Development Tools:** Node.js, npm, pgAdmin
+| Component | Technology |
+|---|---|
+| Frontend | Next.js, React, TypeScript |
+| Styling | Tailwind CSS |
+| Backend | Next.js API Routes |
+| Relational Database | PostgreSQL 18 |
+| NoSQL Database | MongoDB Atlas |
+| Authentication | JWT |
+| Resume Processing | PDF parsing |
+| Database Management | pgAdmin |
+| Package Manager | npm |
+
+## Database Design and Implementation
+
+SmartIntern uses PostgreSQL for structured application data and MongoDB for recommendation activity logging.
+
+### PostgreSQL Database
+
+**Database name:** `smartintern_db`
+
+The relational database contains 11 tables:
+
+1. `users`
+2. `student_profiles`
+3. `resumes`
+4. `skills`
+5. `student_skills`
+6. `companies`
+7. `jobs`
+8. `job_skills`
+9. `applications`
+10. `recommendation_runs`
+11. `inbox_messages`
+
+The `student_skills` and `job_skills` tables are associative relations used to represent many-to-many relationships.
+
+### MongoDB Database
+
+- **Database:** `smartintern`
+- **Collection:** `recommendation_activity_logs`
+
+MongoDB is used to store recommendation activity logs using a flexible document-based structure.
+
+### Database Concepts
+
+The project demonstrates:
+
+- Primary keys and foreign key constraints
+- Relational database design
+- SQL JOIN operations
+- GROUP BY and HAVING clauses
+- Aggregate functions
+- Subqueries
+- Common Table Expressions (CTEs)
+- Database views
+- Indexes
+- MongoDB document operations
+- MongoDB aggregation pipelines
+
+## Database Documentation Files
+
+| File | Description |
+|---|---|
+| `docs/ER_DIAGRAM.png` | Entity Relationship Diagram |
+| `docs/RELATIONAL_SCHEMA.md` | Relational schema and table structure |
+| `docs/DATABASE_DOCUMENTATION.md` | Database design documentation |
+| `database/smartintern_complete.sql` | Complete PostgreSQL database schema |
+| `database/advanced_queries.sql` | Advanced SQL queries |
+| `database/feature-upgrade.sql` | Database feature upgrade script |
+| `database/indexes.sql` | Database index definitions |
+| `database/views.sql` | SQL view definitions |
+| `database/mongodb_aggregation.js` | MongoDB aggregation examples |
+| `tests/database_tests.md` | Database testing documentation |
 
 ## Project Structure
 
@@ -43,12 +121,10 @@ SmartIntern/
 │   │   │   └── register/
 │   │   │       └── route.ts
 │   │   ├── inbox/
-│   │   │   ├── route.ts
+│   │   │   ├── [id]/
+│   │   │   │   └── read/
 │   │   │   ├── contacts/
-│   │   │   │   └── route.ts
-│   │   │   └── [id]/
-│   │   │       └── read/
-│   │   │           └── route.ts
+│   │   │   └── route.ts
 │   │   ├── profile/
 │   │   │   └── route.ts
 │   │   ├── recommendation-history/
@@ -57,13 +133,12 @@ SmartIntern/
 │   │   │   └── route.ts
 │   │   └── resume/
 │   │       ├── tailor/
-│   │       │   └── route.ts
 │   │       └── upload/
-│   │           └── route.ts
 │   ├── favicon.ico
 │   ├── globals.css
 │   ├── layout.tsx
 │   └── page.tsx
+│
 ├── database/
 │   ├── advanced_queries.sql
 │   ├── feature-upgrade.sql
@@ -71,185 +146,92 @@ SmartIntern/
 │   ├── mongodb_aggregation.js
 │   ├── smartintern_complete.sql
 │   └── views.sql
+│
 ├── docs/
 │   ├── DATABASE_DOCUMENTATION.md
 │   ├── ER_DIAGRAM.png
 │   └── RELATIONAL_SCHEMA.md
+│
 ├── lib/
 │   ├── db.ts
 │   ├── mongodb.ts
 │   └── session.ts
+│
+├── public/
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+│
+├── tests/
+│   └── database_tests.md
+│
+├── types/
+│   └── pdf-parse.d.ts
+│
+├── .gitignore
+├── README.md
+├── README-FEATURE-PATCH.md
+├── eslint.config.mjs
+├── next.config.ts
+├── package.json
+├── package-lock.json
 ├── reprocess-resume.cjs
 ├── seed-jobs.cjs
 ├── seed-skills.cjs
-├── README-FEATURE-PATCH.md
-├── README.md
-├── package.json
-├── package-lock.json
-├── next.config.ts
-├── tsconfig.json
-└── eslint.config.mjs
+└── tsconfig.json
 ```
 
-## Database Design
-
-### PostgreSQL
-
-Database Name: `smartintern_db`
-
-The following tables are used in the relational database:
-
-| Table | Description |
-|---|---|
-| users | User accounts and roles |
-| student_profiles | Student profile information |
-| resumes | Uploaded resume details and extracted content |
-| skills | Skill master data |
-| student_skills | Skills associated with students |
-| companies | Company and recruiter information |
-| jobs | Internship and job postings |
-| job_skills | Skills required for jobs |
-| applications | Student internship applications |
-| recommendation_runs | Recommendation execution records |
-| inbox_messages | Messages between users |
-
-### MongoDB
-
-- **Database:** `smartintern`
-- **Collection:** `recommendation_activity_logs`
-- **Purpose:** Stores recommendation activity logs.
-
-## Database Files
-
-| File | Description |
-|---|---|
-| `database/smartintern_complete.sql` | Complete SQL setup script |
-| `database/advanced_queries.sql` | Advanced SQL queries |
-| `database/indexes.sql` | Database indexes |
-| `database/views.sql` | SQL views |
-| `database/feature-upgrade.sql` | Database feature upgrade script |
-| `database/mongodb_aggregation.js` | MongoDB aggregation queries |
-| `docs/ER_DIAGRAM.png` | Entity Relationship Diagram |
-| `docs/RELATIONAL_SCHEMA.md` | Relational schema documentation |
-| `docs/DATABASE_DOCUMENTATION.md` | Database documentation |
-
-## API Routes
-
-| API Endpoint | Description |
-|---|---|
-| `/api/auth/register` | Register a user |
-| `/api/auth/login` | User login |
-| `/api/auth/logout` | User logout |
-| `/api/profile` | Manage profile information |
-| `/api/resume/upload` | Upload and process resumes |
-| `/api/resume/tailor` | Resume tailoring |
-| `/api/recommendations` | Get internship recommendations |
-| `/api/recommendation-history` | Retrieve recommendation history |
-| `/api/applications` | Manage applications |
-| `/api/admin/jobs` | Manage internship/job listings |
-| `/api/inbox` | Access inbox messages |
-| `/api/inbox/contacts` | Retrieve messaging contacts |
-| `/api/inbox/[id]/read` | Mark a message as read |
-
-## Getting Started
-
-### Prerequisites
-
-Install the following software:
-
-- Node.js
-- npm
-- PostgreSQL
-- MongoDB or MongoDB Atlas
+## Installation and Setup
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/pallenenisloka07-lang/SmartIntern.git
+```
+
+### 2. Navigate to the Project Directory
+
+```bash
 cd SmartIntern
 ```
 
-### 2. Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Configure Environment Variables
+### 4. Configure Environment Variables
 
-Create a `.env.local` file in the project root.
+Create a `.env.local` file and configure the required database connections and authentication secret.
 
-Add the database and authentication environment variables required by the application.
+Do not upload this file to GitHub because it contains sensitive credentials.
 
-Example:
-
-```env
-DATABASE_URL=postgresql://USER:PASSWORD@HOST:5432/smartintern_db
-MONGODB_URI=mongodb+srv://USER:PASSWORD@CLUSTER/smartintern
-JWT_SECRET=your_secure_secret
-```
-
-**Note:** These are example variable names. Check `lib/db.ts`, `lib/mongodb.ts`, and `lib/session.ts` for the exact environment variable names used by the project.
-
-Never commit `.env.local` or database credentials to GitHub.
-
-### 4. Set Up Databases
-
-1. Create the PostgreSQL database `smartintern_db`.
-2. Execute the required SQL scripts from the `database/` folder.
-3. Configure the MongoDB database `smartintern`.
-4. Ensure the `recommendation_activity_logs` collection is available.
-5. Verify database connection settings in `.env.local`.
-
-### 5. Run the Application
-
-Start the development server:
+### 5. Run the Development Server
 
 ```bash
 npm run dev
 ```
 
-Open the application in your browser:
+Open http://localhost:3000 in your browser.
 
-```text
-http://localhost:3000
-```
+## Team Members
 
-## Useful Commands
+| Name | SRN |
+|---|---|
+| Palleneni Sloka | PES1UG24AM183 |
+| Pabbisetty Harshitha Sai | PES1UG24AM182 |
 
-```bash
-# Start development server
-npm run dev
+## GitHub Repository
 
-# Build the application
-npm run build
+[SmartIntern – GitHub Repository](https://github.com/pallenenisloka07-lang/SmartIntern)
 
-# Start production server
-npm run start
+## Project Purpose
 
-# Run lint checks
-npm run lint
-```
+SmartIntern aims to simplify the internship search process by connecting student skills and profiles with relevant opportunities through a centralized web platform.
 
-Use commands supported by the scripts defined in `package.json`.
+---
 
-## Security
-
-- Never commit `.env.local` or sensitive credentials.
-- Use strong and unique JWT secrets.
-- Validate and authorize API requests.
-- Protect sensitive student and resume information.
-- Use secure database credentials.
-- Avoid exposing private information in public repositories.
-
-## Future Enhancements
-
-- Improved recommendation accuracy.
-- Better recruiter and student dashboards.
-- Notification functionality.
-- Automated testing.
-- Deployment monitoring and optimization.
-
-## Repository
-
-GitHub Repository: [SmartIntern](https://github.com/pallenenisloka07-lang/SmartIntern)
+**Developed as part of the Database Management Systems (DBMS) Project – PES University.**
